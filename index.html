@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME | The Music Artist</title>
+    <title>PRIME | The Artist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,6 @@
                         'rich-black': '#050505',
                         'rich-black-light': '#0a0a0a',
                         'rich-black-lighter': '#111111',
-                        'charcoal': '#1a1a1a',
                     },
                     fontFamily: {
                         'cinzel': ['Cinzel', 'serif'],
@@ -36,28 +35,22 @@
         }
     </script>
     <style>
-        /* ===== CSS NOISE TEXTURE OVERLAY ===== */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.035;
+            opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 256px 256px;
         }
-
-        /* ===== CUSTOM SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #d4af37, #7a0c0c); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #f0d878, #a81818); }
-
         html { scroll-behavior: smooth; }
-
-        /* ===== KINETIC GRADIENT BACKGROUND ===== */
         .kinetic-bg {
             background: linear-gradient(135deg, #050505 0%, #0a0a0a 25%, #111111 50%, #0a0a0a 75%, #050505 100%);
             background-size: 400% 400%;
@@ -68,52 +61,82 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        /* ===== HERO CINEMATIC ===== */
-        .hero-cinematic {
+        .hero-section {
             position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            margin-top: 70px;
         }
-        .hero-cinematic::before {
-            content: '';
+        .hero-bg {
             position: absolute;
             inset: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(122, 12, 12, 0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 100%, rgba(122, 12, 12, 0.2) 0%, transparent 40%);
-            animation: heroGlowShift 8s ease-in-out infinite alternate;
-            z-index: 1;
-        }
-        @keyframes heroGlowShift {
-            0% { opacity: 0.6; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
-
-        /* ===== LIQUID MESH GRADIENT ===== */
-        .liquid-mesh {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: 
-                radial-gradient(at 40% 20%, rgba(122, 12, 12, 0.3) 0px, transparent 50%),
-                radial-gradient(at 80% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
-                radial-gradient(at 0% 50%, rgba(122, 12, 12, 0.2) 0px, transparent 50%),
-                radial-gradient(at 80% 50%, rgba(212, 175, 55, 0.1) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(122, 12, 12, 0.25) 0px, transparent 50%);
-            filter: blur(80px);
-            animation: liquidMove 12s ease-in-out infinite;
             z-index: 0;
         }
-        @keyframes liquidMove {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
         }
-
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.2) 30%, rgba(5,5,5,0.5) 60%, rgba(5,5,5,0.95) 100%);
+            z-index: 1;
+        }
+        .hero-glow-red {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(122,12,12,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            top: 10%; left: 20%;
+            animation: glowPulse 6s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+        .hero-glow-gold {
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            bottom: 20%; right: 15%;
+            animation: glowPulse 6s ease-in-out infinite alternate;
+            animation-delay: 3s;
+            z-index: 1;
+        }
+        @keyframes glowPulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0.8; }
+        }
+        @media (max-width: 768px) {
+            .hero-section { min-height: 100svh; }
+            .hero-bg img { object-position: 30% center;  object-fit: cover; }
+            .hero-overlay { background: linear-gradient(to bottom, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.3) 25%, rgba(5,5,5,0.6) 50%, rgba(5,5,5,0.98) 100%); }
+            .hero-glow-red, .hero-glow-gold { display: none; }
+            .kinetic-title { font-size: clamp(2.2rem, 11vw, 3.5rem) !important; line-height: 1; }
+            .hero-section .sr-blur { margin-bottom: 0.5rem; }
+            .hero-section .sr-fade { margin-bottom: 1.5rem; }
+            .hero-section .cta-liquid { padding: 14px 36px; font-size: 0.75rem; }
+            .scroll-hint { bottom: 20px; }
+            .scroll-line { height: 35px; }
+        }
+        @media (max-width: 480px) {
+            .hero-section { min-height: 100svh; }
+            .hero-bg img { object-position: 17% top; }
+            .kinetic-title { font-size: clamp(1.8rem, 10vw, 2.8rem) !important; }
+            .hero-section .font-playfair { font-size: 0.9rem; }
+            .hero-section .accent-line { width: 30px; }
+        }
+        @media (max-width: 360px) {
+            .kinetic-title { font-size: 1.6rem !important; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-bg img { object-position: center 20%; }
+        }
         #particle-canvas {
             position: absolute;
             top: 0; left: 0;
@@ -121,12 +144,10 @@
             pointer-events: none;
             z-index: 2;
         }
-
-        /* ===== KINETIC TYPOGRAPHY ===== */
         .kinetic-title {
-            font-size: clamp(3rem, 10vw, 9rem);
+            font-size: clamp(2.5rem, 8vw, 7rem);
             font-weight: 900;
-            line-height: 0.9;
+            line-height: 0.95;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff 0%, #d4af37 30%, #f0d878 50%, #d4af37 70%, #ffffff 100%);
             background-size: 200% auto;
@@ -138,62 +159,42 @@
         @keyframes shine {
             to { background-position: 200% center; }
         }
-
         .kinetic-subtitle {
-            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
             letter-spacing: 0.35em;
             text-transform: uppercase;
-            color: rgba(212, 175, 55, 0.6);
+            color: rgba(212, 175, 55, 0.7);
         }
-
-        /* ===== SCROLL REVEAL ===== */
         .sr-fade {
             opacity: 0;
-            transform: translateY(60px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sr-fade.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .sr-fade.visible { opacity: 1; transform: translateY(0); }
         .sr-left {
             opacity: 0;
-            transform: translateX(-80px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sr-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .sr-left.visible { opacity: 1; transform: translateX(0); }
         .sr-right {
             opacity: 0;
-            transform: translateX(80px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sr-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .sr-right.visible { opacity: 1; transform: translateX(0); }
         .sr-scale {
             opacity: 0;
-            transform: scale(0.8) rotate(-2deg);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.85);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sr-scale.visible {
-            opacity: 1;
-            transform: scale(1) rotate(0);
-        }
+        .sr-scale.visible { opacity: 1; transform: scale(1); }
         .sr-blur {
             opacity: 0;
-            filter: blur(20px);
-            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: blur(15px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .sr-blur.visible {
-            opacity: 1;
-            filter: blur(0);
-        }
-
-        /* ===== TACTILE BRUTALISM CARDS ===== */
+        .sr-blur.visible { opacity: 1; filter: blur(0); }
         .tactile-card {
             background: rgba(10, 10, 10, 0.9);
             border: 1px solid rgba(212, 175, 55, 0.12);
@@ -210,27 +211,21 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-        .tactile-card:hover::before {
-            opacity: 1;
-        }
+        .tactile-card:hover::before { opacity: 1; }
         .tactile-card:hover {
             border-color: rgba(212, 175, 55, 0.3);
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.08), inset 0 1px 0 rgba(212, 175, 55, 0.1);
         }
         .tactile-card.active {
             border-color: rgba(212, 175, 55, 0.45);
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.1), 0 0 120px rgba(122, 12, 12, 0.05), inset 0 1px 0 rgba(212, 175, 55, 0.2);
         }
-        .tactile-card.active::before {
-            opacity: 1;
-        }
-
-        /* ===== PROGRESS BAR - LIQUID ===== */
+        .tactile-card.active::before { opacity: 1; }
         .progress-track {
             position: relative;
             height: 4px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 2px;
             cursor: pointer;
             overflow: visible;
@@ -252,12 +247,12 @@
         .progress-fill::after {
             content: '';
             position: absolute;
-            right: -8px; top: 50%;
+            right: -6px; top: 50%;
             transform: translateY(-50%) scale(0);
-            width: 16px; height: 16px;
+            width: 14px; height: 14px;
             background: #d4af37;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
             opacity: 0;
             transition: all 0.3s ease;
         }
@@ -265,8 +260,6 @@
             opacity: 1;
             transform: translateY(-50%) scale(1);
         }
-
-        /* ===== VOLUME SLIDER ===== */
         .vol-slider {
             -webkit-appearance: none;
             appearance: none;
@@ -278,21 +271,19 @@
         .vol-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 16px; height: 16px;
+            width: 14px; height: 14px;
             background: radial-gradient(circle, #f0d878, #d4af37);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
             transition: all 0.3s ease;
         }
         .vol-slider::-webkit-slider-thumb:hover {
             transform: scale(1.3);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
         }
-
-        /* ===== CONTROL BUTTONS ===== */
         .ctrl-btn {
-            width: 48px; height: 48px;
+            width: 44px; height: 44px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             background: rgba(212, 175, 55, 0.05);
@@ -311,50 +302,44 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        .ctrl-btn:hover::after {
-            opacity: 1;
-        }
+        .ctrl-btn:hover::after { opacity: 1; }
         .ctrl-btn:hover {
             border-color: rgba(212, 175, 55, 0.35);
             color: #d4af37;
-            transform: scale(1.15);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            transform: scale(1.12);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
         }
-        .ctrl-btn:active {
-            transform: scale(0.92);
-        }
+        .ctrl-btn:active { transform: scale(0.95); }
         .ctrl-btn.main {
-            width: 64px; height: 64px;
+            width: 56px; height: 56px;
             background: linear-gradient(135deg, #d4af37, #a08020);
             border: none;
             color: #050505;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         .ctrl-btn.main:hover {
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4), 0 0 80px rgba(212, 175, 55, 0.15);
-            transform: scale(1.18);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.4), 0 0 70px rgba(212, 175, 55, 0.15);
+            transform: scale(1.15);
         }
-
-        /* ===== COVER ART CINEMATIC ===== */
         .cover-cinematic {
             position: relative;
             border-radius: 4px;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .cover-cinematic img {
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             filter: saturate(0.9) contrast(1.05);
         }
         .cover-cinematic:hover img {
-            transform: scale(1.08);
+            transform: scale(1.06);
             filter: saturate(1) contrast(1.1);
         }
         .cover-cinematic::after {
             content: '';
             position: absolute;
             inset: 0;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
             pointer-events: none;
         }
         .vinyl-groove {
@@ -362,52 +347,43 @@
             inset: 0;
             background: repeating-radial-gradient(
                 circle at center,
-                transparent 0px,
-                transparent 2px,
-                rgba(212, 175, 55, 0.03) 2px,
-                rgba(212, 175, 55, 0.03) 3px
+                transparent 0px, transparent 2px,
+                rgba(212, 175, 55, 0.03) 2px, rgba(212, 175, 55, 0.03) 3px
             );
             opacity: 0;
             transition: opacity 0.5s ease;
             pointer-events: none;
         }
         .cover-cinematic:hover .vinyl-groove,
-        .tactile-card.active .cover-cinematic .vinyl-groove {
-            opacity: 1;
-        }
-
-        /* ===== NAVBAR BARELY THERE ===== */
+        .tactile-card.active .cover-cinematic .vinyl-groove { opacity: 1; }
         .nav-premium {
             position: fixed;
             top: 0; left: 0;
             width: 100%;
             z-index: 100;
-            padding: 24px 48px;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 20px 40px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
             transform: translateY(-20px);
         }
-        .nav-premium.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .nav-premium.visible { opacity: 1; transform: translateY(0); }
         .nav-premium.scrolled {
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(30px) saturate(1.2);
-            -webkit-backdrop-filter: blur(30px) saturate(1.2);
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(25px) saturate(1.2);
+            -webkit-backdrop-filter: blur(25px) saturate(1.2);
             border-bottom: 1px solid rgba(212, 175, 55, 0.06);
-            padding: 16px 48px;
+            padding: 14px 40px;
         }
         .nav-link-premium {
             position: relative;
-            color: rgba(255, 255, 255, 0.5);
+            color: #d4af37;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             transition: all 0.4s ease;
-            padding: 8px 0;
+            padding: 6px 0;
         }
         .nav-link-premium::before {
             content: '';
@@ -417,33 +393,25 @@
             background: linear-gradient(90deg, #d4af37, #7a0c0c);
             transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .nav-link-premium:hover {
-            color: #d4af37;
-        }
-        .nav-link-premium:hover::before {
-            width: 100%;
-        }
-
-        /* ===== CTA LIQUID FILL ===== */
+        .nav-link-premium:hover { color: #d4af37; }
+        .nav-link-premium:hover::before { width: 100%; }
         .cta-liquid {
             position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px 52px;
+            gap: 10px;
+            padding: 16px 44px;
             background: transparent;
             border: 1.5px solid rgba(212, 175, 55, 0.35);
             color: #d4af37;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.25em;
             text-transform: uppercase;
             cursor: pointer;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-top: 290px;
-            margin-left: 700px;
         }
         .cta-liquid::before {
             content: '';
@@ -456,24 +424,18 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: -1;
         }
-        .cta-liquid:hover::before {
-            width: 400px; height: 400px;
-        }
+        .cta-liquid:hover::before { width: 350px; height: 350px; }
         .cta-liquid:hover {
             color: #050505;
             border-color: transparent;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
-            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
         }
-        .cta-liquid:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-
+        .cta-liquid:active { transform: translateY(0) scale(0.98); }
         .accent-line {
-            width: 60px; height: 2px;
+            width: 50px; height: 2px;
             background: linear-gradient(90deg, #d4af37, #7a0c0c);
         }
-
         .section-title-ed {
             position: relative;
             display: inline-block;
@@ -481,23 +443,21 @@
         .section-title-ed::after {
             content: '';
             position: absolute;
-            bottom: -16px; left: 0;
+            bottom: -14px; left: 0;
             width: 40px; height: 2px;
             background: linear-gradient(90deg, #d4af37, transparent);
         }
-
-        /* ===== SOCIAL BRUTALIST ===== */
         .social-brutal {
             position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 16px 36px;
+            gap: 10px;
+            padding: 14px 32px;
             background: transparent;
             border: 1px solid rgba(212, 175, 55, 0.2);
             color: rgba(212, 175, 55, 0.7);
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -508,22 +468,16 @@
             background: rgba(212, 175, 55, 0.06);
             border-color: rgba(212, 175, 55, 0.5);
             color: #d4af37;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.08);
             transform: translateY(-2px);
         }
-        .social-brutal i {
-            transition: transform 0.4s ease;
-        }
-        .social-brutal:hover i {
-            transform: scale(1.2);
-        }
-
-        /* ===== EQUALIZER ORGANIC ===== */
+        .social-brutal i { transition: transform 0.4s ease; }
+        .social-brutal:hover i { transform: scale(1.2); }
         .eq-organic {
             display: flex;
             align-items: flex-end;
             gap: 3px;
-            height: 28px;
+            height: 24px;
         }
         .eq-bar {
             width: 3px;
@@ -546,16 +500,14 @@
             animation-play-state: paused;
             transform: scaleY(0.15);
         }
-
         .float-slow {
             animation: floatSlow 8s ease-in-out infinite;
         }
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-12px) rotate(0.5deg); }
-            75% { transform: translateY(8px) rotate(-0.5deg); }
+            25% { transform: translateY(-10px) rotate(0.5deg); }
+            75% { transform: translateY(6px) rotate(-0.5deg); }
         }
-
         .img-editorial {
             position: relative;
             overflow: hidden;
@@ -575,11 +527,9 @@
             filter: saturate(0.85) contrast(1.02);
         }
         .img-editorial:hover img {
-            transform: scale(1.06);
+            transform: scale(1.05);
             filter: saturate(1) contrast(1.05);
         }
-
-        /* ===== MOBILE MENU ===== */
         .mobile-overlay {
             position: fixed;
             inset: 0;
@@ -590,14 +540,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 40px;
+            gap: 36px;
             clip-path: circle(0% at calc(100% - 40px) 40px);
             transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .mobile-overlay.open {
             clip-path: circle(150% at calc(100% - 40px) 40px);
         }
-
         .footer-minimal {
             position: relative;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -607,25 +556,24 @@
             position: absolute;
             top: -1px; left: 50%;
             transform: translateX(-50%);
-            width: 200px; height: 1px;
+            width: 180px; height: 1px;
             background: linear-gradient(90deg, transparent, #d4af37, #7a0c0c, transparent);
         }
-
-        /* ===== SCROLL HINT ===== */
         .scroll-hint {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            z-index: 10;
         }
         .scroll-line {
             width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.6), transparent);
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.5), transparent);
             position: relative;
             overflow: hidden;
         }
@@ -641,8 +589,6 @@
             0% { top: -100%; }
             100% { top: 100%; }
         }
-
-        /* ===== MARQUEE ===== */
         .marquee-container {
             overflow: hidden;
             white-space: nowrap;
@@ -655,33 +601,34 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
         .counter-num {
             font-variant-numeric: tabular-nums;
         }
-
         @media (max-width: 768px) {
-            .kinetic-title { font-size: clamp(2.5rem, 12vw, 4rem); }
-            .nav-premium { padding: 16px 24px; }
-            .nav-premium.scrolled { padding: 12px 24px; }
+            .nav-premium { padding: 14px 20px; }
+            .nav-premium.scrolled { padding: 10px 20px; }
+        }
+        @media (max-width: 480px) {
+            .nav-premium { padding: 12px 16px; }
         }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body class="bg-rich-black text-white font-inter overflow-x-hidden kinetic-bg">
 
     <div class="noise-overlay"></div>
 
-    <!-- NAVIGATION -->
+    <!-- ===== NAVIGATION ===== -->
     <nav id="navbar" class="nav-premium">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center overflow-hidden group-hover:border-gold/50 transition-all duration-500">
-                    <img src="images/logo.png" alt="JM" class="w-10 h-10 object-contain">
+                <div class="w-14 h-14 rounded-full  flex items-center justify-center overflow-hidden group-hover:border-gold/50 transition-all duration-500">
+                    <img src="/images/logo.png" alt="JM" class="w-12 h-12 object-contain">
                 </div>
-                <span class="font-cinzel text-gold/80 text-sm font-semibold tracking-[0.2em] hidden sm:block">PRIME</span>
+                <span class="font-cinzel text-gold/80 text-lg font-semibold tracking-[0.2em] hidden sm:block">PRIME | THE MUSIC ARTIST</span>
             </a>
-            <div class="hidden md:flex items-center gap-12">
+            <div class="hidden md:flex items-center gap-10">
                 <a href="#home" class="nav-link-premium">Home</a>
                 <a href="#music" class="nav-link-premium">Music</a>
                 <a href="#about" class="nav-link-premium">About</a>
@@ -704,53 +651,69 @@
         <a href="#connect" class="mobile-link font-cinzel text-4xl text-white/80 hover:text-gold transition-colors">Connect</a>
     </div>
 
-    <!-- HERO -->
-   <section id="home"
-    class="hero-cinematic min-h-screen bg-cover bg-center bg-no-repeat"
-    style="background-image: url('images/hero.png');">
-        <div class="liquid-mesh"></div>
-        <canvas id="particle-canvas"></canvas>
-        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-            
-            
-            <div class="sr-fade" style="transition-delay: 0.8s;">
-                <a href="#music" class="cta-liquid">
-                    <i class="fas fa-play text-xs"></i>
-                    <span>Listen Now</span>
-                </a>
-            </div>
+    <!-- ===== HERO SECTION ===== -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg">
+            <img src="images/hero.png" alt="PRIME">
         </div>
-        <div class="scroll-hint z-10">
-            <span class="text-[10px] tracking-[0.4em] uppercase text-gold/40 font-space">Scroll</span>
+        <div class="hero-overlay"></div>
+        <div class="hero-glow-red"></div>
+        <div class="hero-glow-gold"></div>
+        <canvas id="particle-canvas"></canvas>
+
+     <div class="relative z-10 text-center px-6 max-w-4xl mx-auto block md:hidden">
+    <div class="mb-6 sr-blur" style="transition-delay: 0.2s;">
+        <p class="kinetic-subtitle font-space">The Artist</p>
+    </div>
+    <h1 class="kinetic-title font-cinzel mb-4 sr-scale" style="transition-delay: 0.4s;">
+        PRIME
+    </h1>
+    <div class="flex items-center justify-center gap-5 mb-10 sr-fade" style="transition-delay: 0.6s;">
+        <div class="accent-line"></div>
+        <p class="font-playfair italic text-base md:text-lg text-white/50 tracking-wide">
+            "Blood, Sweat and Tears"
+        </p>
+        <div class="accent-line"></div>
+    </div>
+    <div class="sr-fade" style="transition-delay: 0.8s;">
+        <a href="#music" class="cta-liquid">
+            <i class="fas fa-play text-[10px]"></i>
+            <span>Listen Now</span>
+        </a>
+    </div>
+</div>
+
+        <div class="scroll-hint">
+            <span class="text-[10px] tracking-[0.4em] uppercase text-gold/35 font-space">Scroll</span>
             <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- MARQUEE DIVIDER -->
-    <div class="py-8 border-y border-white/[0.04] overflow-hidden">
+    <!-- ===== MARQUEE DIVIDER ===== -->
+    <div class="py-6 border-y border-white/[0.03] overflow-hidden">
         <div class="marquee-container">
-            <div class="marquee-text font-space text-xs tracking-[0.3em] uppercase text-white/15">
-                <span class="mx-8">Blood Sweat and Tears</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Roof Top View</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Carnies</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Hello World</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">PRIME</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Blood Sweat and Tears</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Roof Top View</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Carnies</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">Hello World</span><span class="text-gold/25 mx-8">&#9679;</span>
-                <span class="mx-8">PRIME</span><span class="text-gold/25 mx-8">&#9679;</span>
+            <div class="marquee-text font-space text-[10px] tracking-[0.3em] uppercase text-white/12">
+                <span class="mx-6">Blood Sweat and Tears</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Roof Top View</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Carnies</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Hello World</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">PRIME</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Blood Sweat and Tears</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Roof Top View</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Carnies</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">Hello World</span><span class="text-gold/20 mx-6">&#9679;</span>
+                <span class="mx-6">PRIME</span><span class="text-gold/20 mx-6">&#9679;</span>
             </div>
         </div>
     </div>
 
-    <!-- MUSIC SECTION -->
-    <section id="music" class="relative py-32 md:py-40 px-6 lg:px-12">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-deep-red/[0.03] rounded-full blur-[200px] pointer-events-none"></div>
+    <!-- ===== MUSIC SECTION ===== -->
+    <section id="music" class="relative py-28 md:py-36 px-6 lg:px-12">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-deep-red/[0.03] rounded-full blur-[180px] pointer-events-none"></div>
         <div class="max-w-6xl mx-auto relative z-10">
-            <div class="mb-20 sr-fade">
-                <p class="font-space text-gold/40 text-xs tracking-[0.4em] uppercase mb-4">Discography</p>
-                <h2 class="section-title-ed font-cinzel text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+            <div class="mb-16 sr-fade">
+                <p class="font-space text-gold/35 text-[10px] tracking-[0.4em] uppercase mb-4">Discography</p>
+                <h2 class="section-title-ed font-cinzel text-4xl md:text-5xl lg:text-6xl font-bold text-white">
                     THE <span class="text-gold">MUSIC</span>
                 </h2>
                 <p class="text-white/25 max-w-md mt-8 font-light leading-relaxed text-sm">
@@ -758,13 +721,12 @@
                 </p>
             </div>
 
-            <div class="space-y-10">
-
+            <div class="space-y-8">
                 <!-- Song 1: Roof Top View -->
-                <div class="tactile-card rounded-sm p-8 md:p-10 sr-fade" data-song="0">
-                    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-                        <div class="cover-cinematic w-full max-w-[220px] lg:max-w-[240px] flex-shrink-0">
-                            <img src="images/artist.png" alt="Roof Top View" class="w-full aspect-square object-cover">
+                <div class="tactile-card rounded-sm p-6 md:p-8 sr-fade" data-song="0">
+                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+                        <div class="cover-cinematic w-full max-w-[180px] lg:max-w-[200px] flex-shrink-0">
+                            <img src="/images/artist.png" alt="Roof Top View" class="w-full aspect-square object-cover">
                             <div class="vinyl-groove"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" id="overlay-0">
                                 <div class="eq-organic paused" id="eq-0">
@@ -775,29 +737,29 @@
                             </div>
                         </div>
                         <div class="flex-1 w-full min-w-0">
-                            <div class="flex items-start justify-between mb-6 gap-4">
+                            <div class="flex items-start justify-between mb-5 gap-4">
                                 <div>
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <span class="font-space text-[10px] tracking-[0.2em] uppercase text-gold/40 border border-gold/20 px-2 py-1">01</span>
-                                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-white">Roof Top View</h3>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <span class="font-space text-[9px] tracking-[0.2em] uppercase text-gold/35 border border-gold/15 px-2 py-0.5">01</span>
+                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">Roof Top View</h3>
                                     </div>
-                                    <p class="text-white/25 text-sm font-space">PRIME</p>
+                                    <p class="text-white/25 text-xs font-space">PRIME</p>
                                 </div>
-                                <span class="font-space text-gold/40 text-sm tabular-nums shrink-0" id="time-0">0:00 / 0:00</span>
+                                <span class="font-space text-gold/35 text-xs tabular-nums shrink-0" id="time-0">0:00 / 0:00</span>
                             </div>
-                            <div class="progress-track mb-8" id="track-0">
+                            <div class="progress-track mb-6" id="track-0">
                                 <div class="progress-fill" id="fill-0"></div>
                             </div>
-                            <div class="flex items-center justify-between flex-wrap gap-4">
-                                <div class="flex items-center gap-4">
-                                    <button class="ctrl-btn" onclick="skipBack(0)" title="-10s"><i class="fas fa-backward text-xs"></i></button>
-                                    <button class="ctrl-btn main" onclick="togglePlay(0)" id="btn-0"><i class="fas fa-play ml-1"></i></button>
-                                    <button class="ctrl-btn" onclick="skipFwd(0)" title="+10s"><i class="fas fa-forward text-xs"></i></button>
-                                </div>
+                            <div class="flex items-center justify-between flex-wrap gap-3">
                                 <div class="flex items-center gap-3">
-                                    <i class="fas fa-volume-down text-white/15 text-xs"></i>
-                                    <input type="range" class="vol-slider w-24" min="0" max="100" value="80" oninput="setVol(0, this.value)">
-                                    <i class="fas fa-volume-up text-white/15 text-xs"></i>
+                                    <button class="ctrl-btn" onclick="skipBack(0)" title="-10s"><i class="fas fa-backward text-[10px]"></i></button>
+                                    <button class="ctrl-btn main" onclick="togglePlay(0)" id="btn-0"><i class="fas fa-play ml-0.5"></i></button>
+                                    <button class="ctrl-btn" onclick="skipFwd(0)" title="+10s"><i class="fas fa-forward text-[10px]"></i></button>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-volume-down text-white/12 text-[10px]"></i>
+                                    <input type="range" class="vol-slider w-20" min="0" max="100" value="80" oninput="setVol(0, this.value)">
+                                    <i class="fas fa-volume-up text-white/12 text-[10px]"></i>
                                 </div>
                             </div>
                         </div>
@@ -806,10 +768,10 @@
                 </div>
 
                 <!-- Song 2: Carnies -->
-                <div class="tactile-card rounded-sm p-8 md:p-10 sr-fade" data-song="1">
-                    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-                        <div class="cover-cinematic w-full max-w-[220px] lg:max-w-[240px] flex-shrink-0">
-                            <img src="images/carnies.png" alt="Carnies" class="w-full aspect-square object-cover">
+                <div class="tactile-card rounded-sm p-6 md:p-8 sr-fade" data-song="1">
+                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+                        <div class="cover-cinematic w-full max-w-[180px] lg:max-w-[200px] flex-shrink-0">
+                            <img src="/images/carnies.png" alt="Carnies" class="w-full aspect-square object-cover">
                             <div class="vinyl-groove"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" id="overlay-1">
                                 <div class="eq-organic paused" id="eq-1">
@@ -820,29 +782,29 @@
                             </div>
                         </div>
                         <div class="flex-1 w-full min-w-0">
-                            <div class="flex items-start justify-between mb-6 gap-4">
+                            <div class="flex items-start justify-between mb-5 gap-4">
                                 <div>
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <span class="font-space text-[10px] tracking-[0.2em] uppercase text-gold/40 border border-gold/20 px-2 py-1">02</span>
-                                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-white">Carnies</h3>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <span class="font-space text-[9px] tracking-[0.2em] uppercase text-gold/35 border border-gold/15 px-2 py-0.5">02</span>
+                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">Carnies</h3>
                                     </div>
-                                    <p class="text-white/25 text-sm font-space">PRIME</p>
+                                    <p class="text-white/25 text-xs font-space">PRIME</p>
                                 </div>
-                                <span class="font-space text-gold/40 text-sm tabular-nums shrink-0" id="time-1">0:00 / 0:00</span>
+                                <span class="font-space text-gold/35 text-xs tabular-nums shrink-0" id="time-1">0:00 / 0:00</span>
                             </div>
-                            <div class="progress-track mb-8" id="track-1">
+                            <div class="progress-track mb-6" id="track-1">
                                 <div class="progress-fill" id="fill-1"></div>
                             </div>
-                            <div class="flex items-center justify-between flex-wrap gap-4">
-                                <div class="flex items-center gap-4">
-                                    <button class="ctrl-btn" onclick="skipBack(1)" title="-10s"><i class="fas fa-backward text-xs"></i></button>
-                                    <button class="ctrl-btn main" onclick="togglePlay(1)" id="btn-1"><i class="fas fa-play ml-1"></i></button>
-                                    <button class="ctrl-btn" onclick="skipFwd(1)" title="+10s"><i class="fas fa-forward text-xs"></i></button>
-                                </div>
+                            <div class="flex items-center justify-between flex-wrap gap-3">
                                 <div class="flex items-center gap-3">
-                                    <i class="fas fa-volume-down text-white/15 text-xs"></i>
-                                    <input type="range" class="vol-slider w-24" min="0" max="100" value="80" oninput="setVol(1, this.value)">
-                                    <i class="fas fa-volume-up text-white/15 text-xs"></i>
+                                    <button class="ctrl-btn" onclick="skipBack(1)" title="-10s"><i class="fas fa-backward text-[10px]"></i></button>
+                                    <button class="ctrl-btn main" onclick="togglePlay(1)" id="btn-1"><i class="fas fa-play ml-0.5"></i></button>
+                                    <button class="ctrl-btn" onclick="skipFwd(1)" title="+10s"><i class="fas fa-forward text-[10px]"></i></button>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-volume-down text-white/12 text-[10px]"></i>
+                                    <input type="range" class="vol-slider w-20" min="0" max="100" value="80" oninput="setVol(1, this.value)">
+                                    <i class="fas fa-volume-up text-white/12 text-[10px]"></i>
                                 </div>
                             </div>
                         </div>
@@ -851,10 +813,10 @@
                 </div>
 
                 <!-- Song 3: Hello World -->
-                <div class="tactile-card rounded-sm p-8 md:p-10 sr-fade" data-song="2">
-                    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-                        <div class="cover-cinematic w-full max-w-[220px] lg:max-w-[240px] flex-shrink-0">
-                            <img src="images/hello.png" alt="Hello World" class="w-full aspect-square object-cover">
+                <div class="tactile-card rounded-sm p-6 md:p-8 sr-fade" data-song="2">
+                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+                        <div class="cover-cinematic w-full max-w-[180px] lg:max-w-[200px] flex-shrink-0">
+                            <img src="/images/hello.png" alt="Hello World" class="w-full aspect-square object-cover">
                             <div class="vinyl-groove"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" id="overlay-2">
                                 <div class="eq-organic paused" id="eq-2">
@@ -865,29 +827,29 @@
                             </div>
                         </div>
                         <div class="flex-1 w-full min-w-0">
-                            <div class="flex items-start justify-between mb-6 gap-4">
+                            <div class="flex items-start justify-between mb-5 gap-4">
                                 <div>
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <span class="font-space text-[10px] tracking-[0.2em] uppercase text-gold/40 border border-gold/20 px-2 py-1">03</span>
-                                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-white">Hello World</h3>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <span class="font-space text-[9px] tracking-[0.2em] uppercase text-gold/35 border border-gold/15 px-2 py-0.5">03</span>
+                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">Hello World</h3>
                                     </div>
-                                    <p class="text-white/25 text-sm font-space">PRIME ft. Don Adori</p>
+                                    <p class="text-white/25 text-xs font-space">PRIME ft. Don Adori</p>
                                 </div>
-                                <span class="font-space text-gold/40 text-sm tabular-nums shrink-0" id="time-2">0:00 / 0:00</span>
+                                <span class="font-space text-gold/35 text-xs tabular-nums shrink-0" id="time-2">0:00 / 0:00</span>
                             </div>
-                            <div class="progress-track mb-8" id="track-2">
+                            <div class="progress-track mb-6" id="track-2">
                                 <div class="progress-fill" id="fill-2"></div>
                             </div>
-                            <div class="flex items-center justify-between flex-wrap gap-4">
-                                <div class="flex items-center gap-4">
-                                    <button class="ctrl-btn" onclick="skipBack(2)" title="-10s"><i class="fas fa-backward text-xs"></i></button>
-                                    <button class="ctrl-btn main" onclick="togglePlay(2)" id="btn-2"><i class="fas fa-play ml-1"></i></button>
-                                    <button class="ctrl-btn" onclick="skipFwd(2)" title="+10s"><i class="fas fa-forward text-xs"></i></button>
-                                </div>
+                            <div class="flex items-center justify-between flex-wrap gap-3">
                                 <div class="flex items-center gap-3">
-                                    <i class="fas fa-volume-down text-white/15 text-xs"></i>
-                                    <input type="range" class="vol-slider w-24" min="0" max="100" value="80" oninput="setVol(2, this.value)">
-                                    <i class="fas fa-volume-up text-white/15 text-xs"></i>
+                                    <button class="ctrl-btn" onclick="skipBack(2)" title="-10s"><i class="fas fa-backward text-[10px]"></i></button>
+                                    <button class="ctrl-btn main" onclick="togglePlay(2)" id="btn-2"><i class="fas fa-play ml-0.5"></i></button>
+                                    <button class="ctrl-btn" onclick="skipFwd(2)" title="+10s"><i class="fas fa-forward text-[10px]"></i></button>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-volume-down text-white/12 text-[10px]"></i>
+                                    <input type="range" class="vol-slider w-20" min="0" max="100" value="80" oninput="setVol(2, this.value)">
+                                    <i class="fas fa-volume-up text-white/12 text-[10px]"></i>
                                 </div>
                             </div>
                         </div>
@@ -898,49 +860,49 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="relative py-32 md:py-40 px-6 lg:px-12 overflow-hidden">
-        <div class="absolute top-1/2 right-0 w-[800px] h-[800px] bg-gold/[0.03] rounded-full blur-[200px] -translate-y-1/2 pointer-events-none"></div>
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about" class="relative py-28 md:py-36 px-6 lg:px-12 overflow-hidden">
+        <div class="absolute top-1/2 right-0 w-[700px] h-[700px] bg-gold/[0.03] rounded-full blur-[180px] -translate-y-1/2 pointer-events-none"></div>
         <div class="max-w-6xl mx-auto relative z-10">
-            <div class="mb-20 sr-fade">
-                <p class="font-space text-gold/40 text-xs tracking-[0.4em] uppercase mb-4">Biography</p>
-                <h2 class="section-title-ed font-cinzel text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+            <div class="mb-16 sr-fade">
+                <p class="font-space text-gold/35 text-[10px] tracking-[0.4em] uppercase mb-4">Biography</p>
+                <h2 class="section-title-ed font-cinzel text-4xl md:text-5xl lg:text-6xl font-bold text-white">
                     ABOUT THE <span class="text-gold">ARTIST</span>
                 </h2>
             </div>
-            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
                 <div class="lg:col-span-5 sr-left">
                     <div class="img-editorial relative">
-                        <img src="images/about.png" alt="Julian McKenzie" class="w-full">
-                        <div class="absolute -bottom-4 -right-4 w-full h-full border border-gold/10 rounded-sm pointer-events-none"></div>
-                        <div class="absolute -bottom-8 -right-8 w-full h-full border border-gold/5 rounded-sm pointer-events-none"></div>
+                        <img src="/images/about.png" alt="PRIME" class="w-full">
+                        <div class="absolute -bottom-3 -right-3 w-full h-full border border-gold/10 rounded-sm pointer-events-none"></div>
+                        <div class="absolute -bottom-6 -right-6 w-full h-full border border-gold/5 rounded-sm pointer-events-none"></div>
                     </div>
-                    <div class="mt-8 flex items-center gap-4">
+                    <div class="mt-6 flex items-center gap-3">
                         <div class="accent-line"></div>
-                        <span class="font-space text-[10px] tracking-[0.3em] uppercase text-white/25">Official Portrait</span>
+                        <span class="font-space text-[9px] tracking-[0.3em] uppercase text-white/25">Official Portrait</span>
                     </div>
                 </div>
                 <div class="lg:col-span-7 sr-right">
-                    <h3 class="font-cinzel text-3xl md:text-4xl font-bold text-white mb-8 leading-tight">
+                    <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
                         A Journey of <span class="text-gold">Sound</span><br>and <span class="text-deep-red-light">Soul</span>
                     </h3>
-                    <div class="space-y-6 text-white/35 font-light leading-[1.8] text-[15px]">
+                    <div class="space-y-5 text-white/35 font-light leading-[1.8] text-sm">
                         <p>PRIME is more than an artist — he is a storyteller who paints vivid pictures through sound. Born from the streets and shaped by the rhythm of the city, his music carries the weight of real experiences and the beauty of raw emotion.</p>
                         <p>With a sound that fuses deep-groove textures, cinematic production, and soul-stirring lyrics, PRIME has carved out a unique space in the music world. Each track is a chapter — a testament to the blood, sweat, and tears poured into every note.</p>
                         <p>From rooftop sessions to global stages, PRIME continues to push boundaries, collaborating with visionary producers and artists who share his passion for authentic, groundbreaking music.</p>
                     </div>
-                    <div class="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-white/[0.04]">
+                    <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-white/[0.04]">
                         <div>
-                            <p class="font-cinzel text-3xl md:text-4xl font-bold text-gold counter-num" data-target="50">0+</p>
-                            <p class="text-white/20 text-[10px] uppercase tracking-[0.2em] mt-2 font-space">Tracks</p>
+                            <p class="font-cinzel text-2xl md:text-3xl font-bold text-gold counter-num" data-target="50">0+</p>
+                            <p class="text-white/20 text-[9px] uppercase tracking-[0.2em] mt-2 font-space">Tracks</p>
                         </div>
                         <div>
-                            <p class="font-cinzel text-3xl md:text-4xl font-bold text-gold counter-num" data-target="10">0M+</p>
-                            <p class="text-white/20 text-[10px] uppercase tracking-[0.2em] mt-2 font-space">Streams</p>
+                            <p class="font-cinzel text-2xl md:text-3xl font-bold text-gold counter-num" data-target="10">0M+</p>
+                            <p class="text-white/20 text-[9px] uppercase tracking-[0.2em] mt-2 font-space">Streams</p>
                         </div>
                         <div>
-                            <p class="font-cinzel text-3xl md:text-4xl font-bold text-gold counter-num" data-target="25">0+</p>
-                            <p class="text-white/20 text-[10px] uppercase tracking-[0.2em] mt-2 font-space">Countries</p>
+                            <p class="font-cinzel text-2xl md:text-3xl font-bold text-gold counter-num" data-target="25">0+</p>
+                            <p class="text-white/20 text-[9px] uppercase tracking-[0.2em] mt-2 font-space">Countries</p>
                         </div>
                     </div>
                 </div>
@@ -948,60 +910,59 @@
         </div>
     </section>
 
-    <!-- CONNECT SECTION -->
-    <section id="connect" class="relative py-32 md:py-40 px-6 lg:px-12">
+    <!-- ===== CONNECT SECTION ===== -->
+    <section id="connect" class="relative py-28 md:py-36 px-6 lg:px-12">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-deep-red/[0.02] to-transparent pointer-events-none"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <div class="sr-scale">
-                <div class="w-24 h-24 mx-auto mb-10 rounded-full border border-gold/20 flex items-center justify-center float-slow">
-                    <img src="images/logo.png" alt="Logo" class="w-20 h-20 object-contain">
+                <div class="w-36 h-360 mx-auto mb-8 rounded-full  flex items-center justify-center float-slow">
+                    <img src="/images/logo.png" alt="Logo" class="w-32 h-32">
                 </div>
-                <p class="font-space text-gold/40 text-xs tracking-[0.4em] uppercase mb-6">Community</p>
-                <h2 class="font-cinzel text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8">
+             
+                <p class="font-space text-gold/35 text-[10px] tracking-[0.4em] uppercase mb-5">Community</p>
+                <h2 class="font-cinzel text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
                     JOIN THE <span class="text-gold">MOVEMENT</span>
                 </h2>
-                <p class="text-white/25 max-w-lg mx-auto mb-14 font-light leading-relaxed text-sm">
+                <p class="text-white/25 max-w-lg mx-auto mb-12 font-light leading-relaxed text-sm">
                     Follow for exclusive content, behind-the-scenes footage, and new release updates.
                 </p>
-                <div class="flex flex-wrap justify-center gap-5">
+                <div class="flex flex-wrap justify-center gap-4">
                     <a href="https://instagram.com" target="_blank" class="social-brutal"><i class="fab fa-instagram"></i><span>Instagram</span></a>
                     <a href="https://spotify.com" target="_blank" class="social-brutal"><i class="fab fa-spotify"></i><span>Spotify</span></a>
                     <a href="https://youtube.com" target="_blank" class="social-brutal"><i class="fab fa-youtube"></i><span>YouTube</span></a>
                     <a href="https://apple.com/music" target="_blank" class="social-brutal"><i class="fab fa-apple"></i><span>Apple Music</span></a>
                 </div>
-                <div class="flex justify-center gap-3 mt-16">
-                    <div class="w-1.5 h-1.5 rounded-full bg-gold/20"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-gold/35"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-deep-red/35"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-gold/35"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-gold/20"></div>
+                <div class="flex justify-center gap-2 mt-14">
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold/15"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold/30"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-deep-red/30"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold/30"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-gold/15"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer-minimal py-16 px-6 lg:px-12 bg-rich-black-light">
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-minimal py-14 px-6 lg:px-12 bg-rich-black-light">
         <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center overflow-hidden">
-                        <img src="images/logo.png" alt="Logo" class="w-8 h-8 object-contain">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center ">
+                    <div class="w-36 h-36 flex items-center justify-center overflow-hidden">
+                        <img src="/images/logo.png" alt="Logo" class="w-32 h-32 ">
                     </div>
-                    <span class="font-cinzel text-gold/50 text-sm tracking-[0.15em]">PRIME</span>
+                    <span class="font-cinzel text-gold/50 text-lg  tracking-[0.15em]">PRIME | THE MUSIC ARTIST</span>
                 </div>
-                <p class="text-white/15 text-xs font-space tracking-wider">&copy; 2026 All rights reserved.</p>
-                <a href="#home" class="text-gold/25 hover:text-gold/50 transition-colors text-xs font-space tracking-wider flex items-center gap-2">
+                <p class="text-white/15 text-[11px] font-space tracking-wider">&copy; 2026 All rights reserved.</p>
+                <a href="#home" class="text-gold/25 hover:text-gold/50 transition-colors text-[11px] font-space tracking-wider flex items-center gap-2">
                     <span>BACK TO TOP</span>
-                    <i class="fas fa-arrow-up text-[10px]"></i>
+                    <i class="fas fa-arrow-up text-[9px]"></i>
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT -->
     <script>
-        // ===== PARTICLE SYSTEM =====
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -1063,14 +1024,12 @@
         }
         animateParticles();
 
-        // ===== NAVBAR =====
         const navbar = document.getElementById('navbar');
         setTimeout(() => navbar.classList.add('visible'), 500);
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 80);
         });
 
-        // ===== MOBILE MENU =====
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMenu = document.getElementById('close-menu');
@@ -1080,7 +1039,6 @@
             link.addEventListener('click', () => mobileMenu.classList.remove('open'));
         });
 
-        // ===== SCROLL REVEAL =====
         const srObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1097,7 +1055,6 @@
 
         document.querySelectorAll('.sr-fade, .sr-left, .sr-right, .sr-scale, .sr-blur').forEach(el => srObserver.observe(el));
 
-        // ===== COUNTER ANIMATION =====
         function animateCounter(el) {
             const target = parseInt(el.dataset.target);
             const suffix = el.textContent.includes('M') ? 'M+' : '+';
@@ -1110,7 +1067,6 @@
             }, 25);
         }
 
-        // ===== MUSIC PLAYER =====
         let currentSong = -1;
         let isPlaying = false;
 
@@ -1163,7 +1119,7 @@
         function pauseSong(i) {
             getAudio(i).pause();
             isPlaying = false;
-            document.getElementById(`btn-${i}`).innerHTML = '<i class="fas fa-play ml-1"></i>';
+            document.getElementById(`btn-${i}`).innerHTML = '<i class="fas fa-play ml-0.5"></i>';
             document.querySelector(`[data-song="${i}"]`).classList.remove('active');
             document.getElementById(`eq-${i}`).classList.add('paused');
             document.getElementById(`overlay-${i}`).style.opacity = '0';
@@ -1174,7 +1130,7 @@
             audio.pause();
             audio.currentTime = 0;
             if (currentSong === i) { currentSong = -1; isPlaying = false; }
-            document.getElementById(`btn-${i}`).innerHTML = '<i class="fas fa-play ml-1"></i>';
+            document.getElementById(`btn-${i}`).innerHTML = '<i class="fas fa-play ml-0.5"></i>';
             document.querySelector(`[data-song="${i}"]`).classList.remove('active');
             document.getElementById(`eq-${i}`).classList.add('paused');
             document.getElementById(`overlay-${i}`).style.opacity = '0';
@@ -1207,7 +1163,6 @@
 
         [0, 1, 2].forEach(i => getAudio(i).volume = 0.8);
 
-        // ===== SMOOTH ANCHOR SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1216,13 +1171,14 @@
             });
         });
 
-        // ===== MOUSE PARALLAX =====
         if (window.matchMedia('(pointer: fine)').matches) {
             document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 30;
-                const y = (e.clientY / window.innerHeight - 0.5) * 30;
-                const mesh = document.querySelector('.liquid-mesh');
-                if (mesh) mesh.style.transform = `translate(${x}px, ${y}px)`;
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                const glowRed = document.querySelector('.hero-glow-red');
+                const glowGold = document.querySelector('.hero-glow-gold');
+                if (glowRed) glowRed.style.transform = `translate(${x}px, ${y}px)`;
+                if (glowGold) glowGold.style.transform = `translate(${-x}px, ${-y}px)`;
             });
         }
     </script>
