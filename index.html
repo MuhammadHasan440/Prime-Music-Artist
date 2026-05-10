@@ -1005,7 +1005,7 @@
                             </div>
                         </div>
                     </div>
-                    <audio id="audio-0" preload="metadata"><source src="" type="audio/mpeg"></audio>
+                    <audio id="audio-0" preload="metadata"><source src="/audio/roof top.mp3" type="audio/mpeg"></audio>
                 </div>
 
                 <!-- Song 2: Carnies -->
@@ -1050,7 +1050,7 @@
                             </div>
                         </div>
                     </div>
-                    <audio id="audio-1" preload="metadata"><source src="" type="audio/mpeg"></audio>
+                    <audio id="audio-1" preload="metadata"><source src="/audio/carnies.mp3" type="audio/mpeg"></audio>
                 </div>
 
                 <!-- Song 3: Hello World -->
@@ -1072,9 +1072,9 @@
                                 <div>
                                     <div class="flex items-center gap-3 mb-1">
                                         <span class="font-space text-[9px] tracking-[0.2em] uppercase text-gold/35 border border-gold/15 px-2 py-0.5">03</span>
-                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">Hello World</h3>
+                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">hello world</h3>
                                     </div>
-                                    <p class="text-white/25 text-xs font-space">PRIME ft. Don Adori</p>
+                                    <p class="text-white/25 text-xs font-space">PRIME ft Don Adori</p>
                                 </div>
                                 <span class="font-space text-gold/35 text-xs tabular-nums shrink-0" id="time-2">0:00 / 0:00</span>
                             </div>
@@ -1095,7 +1095,53 @@
                             </div>
                         </div>
                     </div>
-                    <audio id="audio-2" preload="metadata"><source src="" type="audio/mpeg"></audio>
+                    <audio id="audio-2" preload="metadata"><source src="/audio/hello world.mp3" type="audio/mpeg"></audio>
+                </div>
+
+
+                  <!-- Song 3: Love Me Or Leave Me -->
+                <div class="tactile-card rounded-sm p-6 md:p-8 sr-fade" data-song="3">
+                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+                        <div class="cover-cinematic w-full max-w-[180px] lg:max-w-[200px] flex-shrink-0">
+                            <img src="/images/love.png" alt="Love Me Or Leave Me" class="w-full aspect-square object-cover">
+                            <div class="vinyl-groove"></div>
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" id="overlay-3">
+                                <div class="eq-organic paused" id="eq-3">
+                                    <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    <div class="eq-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full min-w-0">
+                            <div class="flex items-start justify-between mb-5 gap-4">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <span class="font-space text-[9px] tracking-[0.2em] uppercase text-gold/35 border border-gold/15 px-2 py-0.5">04</span>
+                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">Love Me Or Leave Me</h3>
+                                    </div>
+                                    <p class="text-white/25 text-xs font-space">PRIME</p>
+                                </div>
+                                <span class="font-space text-gold/35 text-xs tabular-nums shrink-0" id="time-3">0:00 / 0:00</span>
+                            </div>
+                           <div class="progress-track mb-6" id="track-3">
+        <div class="progress-fill" id="fill-3"></div> <!-- FIX -->
+    </div>
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <button class="ctrl-btn" onclick="skipBack(3)" title="-10s"><i class="fas fa-backward text-[10px]"></i></button>
+                                    <button class="ctrl-btn main" onclick="togglePlay(3)" id="btn-3"><i class="fas fa-play ml-0.5"></i></button>
+                                    <button class="ctrl-btn" onclick="skipFwd(3)" title="+10s"><i class="fas fa-forward text-[10px]"></i></button>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-volume-down text-white/12 text-[10px]"></i>
+                                    <input type="range" class="vol-slider w-20" min="0" max="100" value="80" oninput="setVol(3, this.value)">
+                                    <i class="fas fa-volume-up text-white/12 text-[10px]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <audio id="audio-3" preload="metadata"><source src="/audio/love me.mp3" type="audio/mpeg"></audio>
                 </div>
             </div>
         </div>
@@ -1416,7 +1462,7 @@
             }
         }
 
-        [0, 1, 2].forEach(i => {
+        [0, 1, 2,3].forEach(i => {
             const audio = getAudio(i);
             if (!audio) return;
             
