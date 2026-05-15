@@ -1099,7 +1099,7 @@
                 </div>
 
 
-                  <!-- Song 3: Love Me Or Leave Me -->
+                  <!-- Song 4: Love Me Or Leave Me -->
                 <div class="tactile-card rounded-sm p-6 md:p-8 sr-fade" data-song="3">
                     <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
                         <div class="cover-cinematic w-full max-w-[180px] lg:max-w-[200px] flex-shrink-0">
@@ -1143,6 +1143,52 @@
                     </div>
                     <audio id="audio-3" preload="metadata"><source src="/audio/love me.mp3" type="audio/mpeg"></audio>
                 </div>
+
+                <div class="tactile-card rounded-sm p-6 md:p-8 sr-fade" data-song="4">
+                    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+                        <div class="cover-cinematic w-full max-w-[180px] lg:max-w-[200px] flex-shrink-0">
+                            <img src="/images/lowkey.png" alt="Love Me Or Leave Me" class="w-full aspect-square object-cover">
+                            <div class="vinyl-groove"></div>
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300" id="overlay-3">
+                                <div class="eq-organic paused" id="eq-4">
+                                    <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    <div class="eq-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full min-w-0">
+                            <div class="flex items-start justify-between mb-5 gap-4">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <span class="font-space text-[9px] tracking-[0.2em] uppercase text-gold/35 border border-gold/15 px-2 py-0.5">05</span>
+                                        <h3 class="font-cinzel text-xl md:text-2xl font-bold text-white">LowKey</h3>
+                                    </div>
+                                    <p class="text-white/25 text-xs font-space">PRIME</p>
+                                </div>
+                                <span class="font-space text-gold/35 text-xs tabular-nums shrink-0" id="time-4">0:00 / 0:00</span>
+                            </div>
+                           <div class="progress-track mb-6" id="track-4">
+        <div class="progress-fill" id="fill-4"></div> <!-- FIX -->
+    </div>
+                            <div class="flex items-center justify-between flex-wrap gap-3">
+                                <div class="flex items-center gap-3">
+                                    <button class="ctrl-btn" onclick="skipBack(4)" title="-10s"><i class="fas fa-backward text-[10px]"></i></button>
+                                    <button class="ctrl-btn main" onclick="togglePlay(4)" id="btn-4"><i class="fas fa-play ml-0.5"></i></button>
+                                    <button class="ctrl-btn" onclick="skipFwd(4)" title="+10s"><i class="fas fa-forward text-[10px]"></i></button>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-volume-down text-white/12 text-[10px]"></i>
+                                    <input type="range" class="vol-slider w-20" min="0" max="100" value="80" oninput="setVol(4, this.value)">
+                                    <i class="fas fa-volume-up text-white/12 text-[10px]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <audio id="audio-4" preload="metadata"><source src="/audio/lowkey.mp3" type="audio/mpeg"></audio>
+                </div>
+
+
             </div>
         </div>
     </section>
@@ -1473,7 +1519,7 @@ From rooftop sessions to global stages, I continue to push boundaries, collabora
             }
         }
 
-        [0, 1, 2,3].forEach(i => {
+        [0, 1, 2,3,4].forEach(i => {
             const audio = getAudio(i);
             if (!audio) return;
             
